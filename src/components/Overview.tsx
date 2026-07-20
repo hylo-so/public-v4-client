@@ -3,6 +3,7 @@ import { VaultDisplayer } from '@/components/VaultDisplayer';
 import { useMultisigData } from '@/hooks/useMultisigData';
 import { ChangeMultisig } from '@/components/ChangeMultisig';
 import { ActionNeeded, RecentActivity } from '@/components/SquadActivity';
+import { ProgramsHealth } from '@/components/ProgramsHealth';
 
 export default function Overview() {
   const { multisigAddress } = useMultisigData();
@@ -13,12 +14,15 @@ export default function Overview() {
       {multisigAddress && (
         <div className="flex flex-col gap-4">
           <ActionNeeded />
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="flex-1"><VaultDisplayer /></div>
-            <div className="flex-1"><ChangeMultisig /></div>
+          <div className="grid gap-4 lg:grid-cols-3">
+            <VaultDisplayer />
+            <ProgramsHealth />
+            <RecentActivity />
           </div>
           <TokenList multisigPda={multisigAddress} />
-          <RecentActivity />
+          <div className="lg:max-w-md">
+            <ChangeMultisig />
+          </div>
         </div>
       )}
     </div>
